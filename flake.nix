@@ -1,21 +1,10 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      rust-overlay,
-      ...
-    }:
+    { self, nixpkgs, ... }:
     let
       systems = [
         "aarch64-darwin"
@@ -23,74 +12,42 @@
         "x86_64-darwin"
         "x86_64-linux"
       ];
-      inherit (nixpkgs) lib;
+
       forEachSystem =
-        f:
-        (lib.listToAttrs (
-          map (system: {
-            name = system;
-            value = f {
-              inherit system;
-              pkgs = import nixpkgs {
-                inherit system;
-                overlays = [ rust-overlay.overlays.default ];
-              };
-            };
-          }) systems
-        ));
+        function:
+        nixpkgs.lib.genAttrs systems (
+          system:
+          function {
+            inherit system;
+            pkgs = nixpkgs.legacyPackages.${system};
+          }
+        );
     in
     {
       devShells = forEachSystem (
         { pkgs, system }:
-        let
-          rust-toolchain = (
-            pkgs.rust-bin.stable.latest.default.override {
-              extensions = [
-                "rustfmt"
-                "rust-analyzer"
-                "clippy"
-                "rust-src"
-              ];
-              targets = [ "wasm32-unknown-unknown" ];
-            }
-          );
-        in
         {
-          default = pkgs.mkShell {
-            inputsFrom = [ self.packages.${system}.default ];
-            packages = [ rust-toolchain ];
-            env.RUST_SRC_PATH = "${rust-toolchain}/lib/rustlib/src/rust/library";
+          default = import ./shell.nix {
+            inherit pkgs system;
+            inherit (self.packages.${system}) catwalk;
           };
         }
       );
+
+      formatter = forEachSystem ({ pkgs, ... }: pkgs.nixfmt-rfc-style);
 
       packages = forEachSystem (
         { pkgs, system }:
         let
-          rust-toolchain = (
-            pkgs.rust-bin.stable.latest.default.override {
-              extensions = [
-                "rustfmt"
-                "rust-analyzer"
-                "clippy"
-                "rust-src"
-              ];
-              targets = [ "wasm32-unknown-unknown" ];
-            }
-          );
+          pkgs' = import ./default.nix { inherit pkgs system; };
         in
         {
+          inherit (pkgs') catwalk;
           default = self.packages.${system}.catwalk;
-          catwalk = pkgs.callPackage ./default.nix {
-            rustPlatform = pkgs.makeRustPlatform {
-              cargo = rust-toolchain;
-              rustc = rust-toolchain;
-            };
-          };
         }
       );
 
-      overlays.default = final: _: { catppuccin-catwalk = final.callPackage ./default.nix { }; };
+      overlays.default = final: prev: import ./overlay.nix final prev;
     };
 
   nixConfig = {
