@@ -92,7 +92,7 @@ function handleError(f, args) {
     try {
         return f.apply(this, args);
     } catch (e) {
-        wasm.__wbindgen_exn_store(addHeapObject(e));
+        wasm.__wbindgen_export_2(addHeapObject(e));
     }
 }
 /**
@@ -218,13 +218,13 @@ export class Catwalk {
     static new_from_u8_array(latte, frappe, macchiato, mocha, width) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            const ptr0 = passArray8ToWasm0(latte, wasm.__wbindgen_malloc);
+            const ptr0 = passArray8ToWasm0(latte, wasm.__wbindgen_export_1);
             const len0 = WASM_VECTOR_LEN;
-            const ptr1 = passArray8ToWasm0(frappe, wasm.__wbindgen_malloc);
+            const ptr1 = passArray8ToWasm0(frappe, wasm.__wbindgen_export_1);
             const len1 = WASM_VECTOR_LEN;
-            const ptr2 = passArray8ToWasm0(macchiato, wasm.__wbindgen_malloc);
+            const ptr2 = passArray8ToWasm0(macchiato, wasm.__wbindgen_export_1);
             const len2 = WASM_VECTOR_LEN;
-            const ptr3 = passArray8ToWasm0(mocha, wasm.__wbindgen_malloc);
+            const ptr3 = passArray8ToWasm0(mocha, wasm.__wbindgen_export_1);
             const len3 = WASM_VECTOR_LEN;
             wasm.catwalk_new_from_u8_array(retptr, ptr0, len0, ptr1, len1, ptr2, len2, ptr3, len3, width);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
@@ -299,7 +299,7 @@ export class Catwalk {
             return getStringFromWasm0(r0, r1);
         } finally {
             wasm.__wbindgen_add_to_stack_pointer(16);
-            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+            wasm.__wbindgen_export_0(deferred1_0, deferred1_1, 1);
         }
     }
 }
@@ -366,7 +366,7 @@ export class CatwalkBuffer {
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var v1 = getArrayU8FromWasm0(r0, r1).slice();
-            wasm.__wbindgen_free(r0, r1 * 1, 1);
+            wasm.__wbindgen_export_0(r0, r1 * 1, 1);
             return v1;
         } finally {
             wasm.__wbindgen_add_to_stack_pointer(16);
@@ -393,7 +393,7 @@ const imports = {
         },
         __wbg_data_c02d3aac6da15e9f: function(arg0, arg1) {
             const ret = getObject(arg1).data;
-            const ptr1 = passArray8ToWasm0(ret, wasm.__wbindgen_malloc);
+            const ptr1 = passArray8ToWasm0(ret, wasm.__wbindgen_export_1);
             const len1 = WASM_VECTOR_LEN;
             getInt32Memory0()[arg0 / 4 + 1] = len1;
             getInt32Memory0()[arg0 / 4 + 0] = ptr1;
