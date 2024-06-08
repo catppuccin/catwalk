@@ -2,3 +2,7 @@
 pkg/*
 # keep deno for esm
 !pkg/deno
+# cargo
+target/
+# nix
+result
