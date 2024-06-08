@@ -66,17 +66,26 @@
 
       packages = forEachSystem (
         { pkgs, system }:
+        let
+          rust-toolchain = (
+            pkgs.rust-bin.stable.latest.default.override {
+              extensions = [
+                "rustfmt"
+                "rust-analyzer"
+                "clippy"
+                "rust-src"
+              ];
+              targets = [ "wasm32-unknown-unknown" ];
+            }
+          );
+        in
         {
           default = self.packages.${system}.catwalk;
           catwalk = pkgs.callPackage ./default.nix {
-            rustPlatform =
-              let
-                toolchain = pkgs.rust-bin.stable.latest.default;
-              in
-              pkgs.makeRustPlatform {
-                cargo = toolchain;
-                rustc = toolchain;
-              };
+            rustPlatform = pkgs.makeRustPlatform {
+              cargo = rust-toolchain;
+              rustc = rust-toolchain;
+            };
           };
         }
       );
