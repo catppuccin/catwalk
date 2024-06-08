@@ -14,13 +14,11 @@ jobs:
 
       - uses: DeterminateSystems/nix-installer-action@main
 
-      - run: nix develop
-
       - name: clippy
         run: |
-          cargo clippy
-          cargo clippy --target wasm32-unknown-unknown --lib
-          cargo clippy --target wasm32-unknown-unknown --lib --all-features
+          nix develop --command cargo clippy
+          nix develop --command cargo clippy --target wasm32-unknown-unknown --lib
+          nix develop --command cargo clippy --target wasm32-unknown-unknown --lib --all-features
 
       - name: rustfmt check
         run: |
