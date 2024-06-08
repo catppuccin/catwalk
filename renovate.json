@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>catppuccin/renovate-config"
+    "local>catppuccin/renovate-config",
+    "github>Omochice/renovate-config:deno"
   ]
 }
