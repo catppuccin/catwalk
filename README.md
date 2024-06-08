@@ -13,6 +13,12 @@
 
 &nbsp;
 
+> [!IMPORTANT]
+> This repository has been migrated from
+> [catppuccin/toolbox](https://github.com/catppuccin/toolbox/tree/main/catwalk). To view releases
+> prior to [v1.3.1](https://github.com/catppuccin/catwalk/releases/tag/v1.3.1),
+> see the [releases from catppuccin/toolbox](https://github.com/catppuccin/toolbox/releases?q=catwalk&expanded=true).
+
 ## Installation
 
 You can install Catwalk using one of the methods below:
