@@ -10,10 +10,17 @@
 pkgs.mkShell {
   inputsFrom = [ catwalk ];
 
-  packages = [
-    pkgs.clippy
-    pkgs.rustfmt
-    pkgs.rust-analyzer
+  packages = with pkgs; [
+    clippy
+    rustfmt
+    rust-analyzer
+    
+    # wasm support
+    llvmPackages.bintools
+    just
+    deno
+    nodejs
+    wasm-pack
   ];
 
   RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
