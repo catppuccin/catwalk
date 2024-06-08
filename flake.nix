@@ -42,21 +42,24 @@
     {
       devShells = forEachSystem (
         { pkgs, system }:
+        let
+          rust-toolchain = (
+            pkgs.rust-bin.stable.latest.default.override {
+              extensions = [
+                "rustfmt"
+                "rust-analyzer"
+                "clippy"
+                "rust-src"
+              ];
+              targets = [ "wasm32-unknown-unknown" ];
+            }
+          );
+        in
         {
           default = pkgs.mkShell {
             inputsFrom = [ self.packages.${system}.default ];
-
-            packages = [
-              (pkgs.rust-bin.stable.latest.default.override {
-                extensions = [
-                  "rustfmt"
-                  "rust-analyzer"
-                  "clippy"
-                  "rust-src"
-                ];
-                targets = [ "wasm32-unknown-unknown" ];
-              })
-            ];
+            packages = [ rust-toolchain ];
+            env.RUST_SRC_PATH = "${rust-toolchain}/lib/rustlib/src/rust/library";
           };
         }
       );
