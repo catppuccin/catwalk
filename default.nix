@@ -6,6 +6,10 @@
   },
   system ? builtins.currentSystem,
 }:
+let
+  # re-use our overlay definition
+  pkgs' = import ./overlay.nix pkgs null;
+in
 {
-  catwalk = pkgs.callPackage ./nix/package.nix { };
+	catwalk = pkgs'.catppuccin-catwalk;
 }
