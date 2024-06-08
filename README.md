@@ -6,14 +6,12 @@
 </h3>
 
 <p align="center">
-  <a href="https://github.com/catppuccin/toolbox/stargazers"><img src="https://img.shields.io/github/stars/catppuccin/toolbox?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
-  <a href="https://github.com/catppuccin/toolbox/issues?label=catwalk"><img src="https://img.shields.io/github/issues/catppuccin/toolbox?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
-  <a href="https://github.com/catppuccin/toolbox/contributors"><img src="https://img.shields.io/github/contributors/catppuccin/toolbox?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
+  <a href="https://github.com/catppuccin/catwalk/stargazers"><img src="https://img.shields.io/github/stars/catppuccin/catwalk?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://github.com/catppuccin/catwalk/issues?label=catwalk"><img src="https://img.shields.io/github/issues/catppuccin/catwalk?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
+  <a href="https://github.com/catppuccin/catwalk/contributors"><img src="https://img.shields.io/github/contributors/catppuccin/catwalk?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
 </p>
 
 &nbsp;
-
-A sweet program that takes in four showcase images and displays them all at once.
 
 ## Installation
 
@@ -22,16 +20,16 @@ You can install Catwalk using one of the methods below:
 | Installation Method                   | Instructions                                                                                                                  |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | crates.io                             | `cargo install catppuccin-catwalk`                                                                                            |
-| Source                                | `cargo install --git https://github.com/catppuccin/toolbox catppuccin-catwalk`                                                |
+| Source                                | `cargo install --git https://github.com/catppuccin/catwalk catppuccin-catwalk`                                                |
 | Homebrew                              | `brew install catppuccin/tap/catwalk`                                                                                         |
-| Nix                                   | `nix profile install github:catppuccin/toolbox#catwalk`<br/>`nix run github:catppuccin/toolbox#catwalk -- [OPTIONS] <images>` |
-| Binaries<br/>(Windows, MacOS & Linux) | Available from the [latest GitHub release](https://github.com/catppuccin/toolbox/releases?q=catwalk).                         |
+| Nix                                   | `nix profile install github:catppuccin/whiskers` <br/> `nix run github:catppuccin/catwalk -- [OPTIONS] <images>` |
+| Binaries<br/>(Windows, MacOS & Linux) | Available from the [latest GitHub release](https://github.com/catppuccin/catwalk/releases).                         |
 
 ## Usage
 
 ```console
 $ catwalk --help
-A sweet program that takes in four showcase images and displays them all at once.
+🚶Soothing pastel previews for the high-spirited!
 
 Usage: catwalk [OPTIONS] [LATTE] [FRAPPE] [MACCHIATO] [MOCHA] [COMMAND]
 
