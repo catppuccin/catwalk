@@ -5,7 +5,7 @@ rustPlatform.buildRustPackage {
 
   src = lib.fileset.toSource {
     root = ../.;
-    fileset = lib.fileset.intersection (lib.fileset.fromSource (lib.sources.cleanSource ./.)) (
+    fileset = lib.fileset.intersection (lib.fileset.fromSource (lib.sources.cleanSource ../.)) (
       lib.fileset.unions [
         ../Cargo.toml
         ../Cargo.lock
