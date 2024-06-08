@@ -47,6 +47,10 @@ function addHeapObject(obj) {
     return idx;
 }
 
+function isLikeNone(x) {
+    return x === undefined || x === null;
+}
+
 let cachedInt32Memory0 = null;
 
 function getInt32Memory0() {
@@ -68,10 +72,6 @@ function passArray8ToWasm0(arg, malloc) {
     getUint8Memory0().set(arg, ptr / 1);
     WASM_VECTOR_LEN = arg.length;
     return ptr;
-}
-
-function isLikeNone(x) {
-    return x === undefined || x === null;
 }
 
 let cachedUint8ClampedMemory0 = null;
@@ -98,6 +98,10 @@ function handleError(f, args) {
 /**
 */
 export const Layout = Object.freeze({ Composite:0,"0":"Composite",Stacked:1,"1":"Stacked",Grid:2,"2":"Grid",Row:3,"3":"Row", });
+
+const CatwalkFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_catwalk_free(ptr >>> 0));
 /**
 */
 export class Catwalk {
@@ -106,20 +110,70 @@ export class Catwalk {
         ptr = ptr >>> 0;
         const obj = Object.create(Catwalk.prototype);
         obj.__wbg_ptr = ptr;
-
+        CatwalkFinalization.register(obj, obj.__wbg_ptr, obj);
         return obj;
     }
 
     __destroy_into_raw() {
         const ptr = this.__wbg_ptr;
         this.__wbg_ptr = 0;
-
+        CatwalkFinalization.unregister(this);
         return ptr;
     }
 
     free() {
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_catwalk_free(ptr);
+    }
+    /**
+    * @param {number | undefined} [aa_level]
+    * @returns {Catwalk}
+    */
+    aa_level(aa_level) {
+        const ptr = this.__destroy_into_raw();
+        const ret = wasm.catwalk_aa_level(ptr, !isLikeNone(aa_level), isLikeNone(aa_level) ? 0 : aa_level);
+        return Catwalk.__wrap(ret);
+    }
+    /**
+    * @param {number | undefined} [gap]
+    * @returns {Catwalk}
+    */
+    gap(gap) {
+        const ptr = this.__destroy_into_raw();
+        const ret = wasm.catwalk_gap(ptr, !isLikeNone(gap), isLikeNone(gap) ? 0 : gap);
+        return Catwalk.__wrap(ret);
+    }
+    /**
+    * @param {Layout | undefined} [layout]
+    * @returns {Catwalk}
+    */
+    layout(layout) {
+        const ptr = this.__destroy_into_raw();
+        const ret = wasm.catwalk_layout(ptr, isLikeNone(layout) ? 4 : layout);
+        return Catwalk.__wrap(ret);
+    }
+    /**
+    * Sets the radius of the rounding mask.
+    * # Errors
+    * Returns an error if the height or width are not set (automatically inferred from the `new` method arguments)
+    * @param {number | undefined} [radius]
+    * @returns {Catwalk}
+    */
+    radius(radius) {
+        try {
+            const ptr = this.__destroy_into_raw();
+            const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
+            wasm.catwalk_radius(retptr, ptr, !isLikeNone(radius), isLikeNone(radius) ? 0 : radius);
+            var r0 = getInt32Memory0()[retptr / 4 + 0];
+            var r1 = getInt32Memory0()[retptr / 4 + 1];
+            var r2 = getInt32Memory0()[retptr / 4 + 2];
+            if (r2) {
+                throw takeObject(r1);
+            }
+            return Catwalk.__wrap(r0);
+        } finally {
+            wasm.__wbindgen_add_to_stack_pointer(16);
+        }
     }
     /**
     * Create a new Catwalk from 4 `web_sys::ImageData` objects
@@ -248,57 +302,11 @@ export class Catwalk {
             wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
         }
     }
-    /**
-    * @param {number | undefined} aa_level
-    * @returns {Catwalk}
-    */
-    aa_level(aa_level) {
-        const ptr = this.__destroy_into_raw();
-        const ret = wasm.catwalk_aa_level(ptr, !isLikeNone(aa_level), isLikeNone(aa_level) ? 0 : aa_level);
-        return Catwalk.__wrap(ret);
-    }
-    /**
-    * @param {number | undefined} gap
-    * @returns {Catwalk}
-    */
-    gap(gap) {
-        const ptr = this.__destroy_into_raw();
-        const ret = wasm.catwalk_gap(ptr, !isLikeNone(gap), isLikeNone(gap) ? 0 : gap);
-        return Catwalk.__wrap(ret);
-    }
-    /**
-    * @param {number | undefined} layout
-    * @returns {Catwalk}
-    */
-    layout(layout) {
-        const ptr = this.__destroy_into_raw();
-        const ret = wasm.catwalk_layout(ptr, isLikeNone(layout) ? 4 : layout);
-        return Catwalk.__wrap(ret);
-    }
-    /**
-    * Sets the radius of the rounding mask.
-    * # Errors
-    * Returns an error if the height or width are not set (automatically inferred from the `new` method arguments)
-    * @param {number | undefined} radius
-    * @returns {Catwalk}
-    */
-    radius(radius) {
-        try {
-            const ptr = this.__destroy_into_raw();
-            const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.catwalk_radius(retptr, ptr, !isLikeNone(radius), isLikeNone(radius) ? 0 : radius);
-            var r0 = getInt32Memory0()[retptr / 4 + 0];
-            var r1 = getInt32Memory0()[retptr / 4 + 1];
-            var r2 = getInt32Memory0()[retptr / 4 + 2];
-            if (r2) {
-                throw takeObject(r1);
-            }
-            return Catwalk.__wrap(r0);
-        } finally {
-            wasm.__wbindgen_add_to_stack_pointer(16);
-        }
-    }
 }
+
+const CatwalkBufferFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_catwalkbuffer_free(ptr >>> 0));
 /**
 */
 export class CatwalkBuffer {
@@ -307,14 +315,14 @@ export class CatwalkBuffer {
         ptr = ptr >>> 0;
         const obj = Object.create(CatwalkBuffer.prototype);
         obj.__wbg_ptr = ptr;
-
+        CatwalkBufferFinalization.register(obj, obj.__wbg_ptr, obj);
         return obj;
     }
 
     __destroy_into_raw() {
         const ptr = this.__wbg_ptr;
         this.__wbg_ptr = 0;
-
+        CatwalkBufferFinalization.unregister(this);
         return ptr;
     }
 
@@ -358,7 +366,7 @@ export class CatwalkBuffer {
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var v1 = getArrayU8FromWasm0(r0, r1).slice();
-            wasm.__wbindgen_free(r0, r1 * 1);
+            wasm.__wbindgen_free(r0, r1 * 1, 1);
             return v1;
         } finally {
             wasm.__wbindgen_add_to_stack_pointer(16);
@@ -375,22 +383,22 @@ const imports = {
             const ret = getStringFromWasm0(arg0, arg1);
             return addHeapObject(ret);
         },
-        __wbg_width_c97f89a38a3c1da7: function(arg0) {
+        __wbg_width_ddb5e7bb9fbdd107: function(arg0) {
             const ret = getObject(arg0).width;
             return ret;
         },
-        __wbg_height_c8424a3757db7869: function(arg0) {
+        __wbg_height_2c4b892494a113f4: function(arg0) {
             const ret = getObject(arg0).height;
             return ret;
         },
-        __wbg_data_eaf4962120932fdc: function(arg0, arg1) {
+        __wbg_data_c02d3aac6da15e9f: function(arg0, arg1) {
             const ret = getObject(arg1).data;
             const ptr1 = passArray8ToWasm0(ret, wasm.__wbindgen_malloc);
             const len1 = WASM_VECTOR_LEN;
             getInt32Memory0()[arg0 / 4 + 1] = len1;
             getInt32Memory0()[arg0 / 4 + 0] = ptr1;
         },
-        __wbg_newwithu8clampedarray_fb90064f569c16ec: function() { return handleError(function (arg0, arg1, arg2) {
+        __wbg_newwithu8clampedarray_ae824147b27925fc: function() { return handleError(function (arg0, arg1, arg2) {
             const ret = new ImageData(getClampedArrayU8FromWasm0(arg0, arg1), arg2 >>> 0);
             return addHeapObject(ret);
         }, arguments) },
