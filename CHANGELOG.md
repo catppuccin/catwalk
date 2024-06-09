@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/catppuccin/catwalk/compare/v1.3.1...v1.3.2) (2024-06-09)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate clap_complete to v4.5.5 ([#3](https://github.com/catppuccin/catwalk/issues/3)) ([f95b7ef](https://github.com/catppuccin/catwalk/commit/f95b7efd29cd6ab3b6ae6915d4a06fa00c29e7b1))
+
 ## [1.3.1](https://github.com/catppuccin/toolbox/compare/catwalk-v1.3.0...catwalk-v1.3.1) (2024-05-20)
 
 
