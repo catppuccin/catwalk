@@ -13,6 +13,8 @@
 
 &nbsp;
 
+Catwalk makes it easy to generate [beautiful preview images](https://raw.githubusercontent.com/catppuccin/vscode/main/assets/preview.webp) for your ports.
+
 > [!IMPORTANT]
 > This repository has been migrated from
 > [catppuccin/toolbox](https://github.com/catppuccin/toolbox/tree/main/catwalk). To view releases
