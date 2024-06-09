@@ -11,5 +11,5 @@ let
   pkgs' = import ./overlay.nix pkgs null;
 in
 {
-	catwalk = pkgs'.catppuccin-catwalk;
+  catwalk = pkgs'.catppuccin-catwalk;
 }

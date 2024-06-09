@@ -14,7 +14,7 @@ pkgs.mkShell {
     clippy
     rustfmt
     rust-analyzer
-    
+
     # wasm support
     llvmPackages.bintools
     just
