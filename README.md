@@ -13,7 +13,7 @@
 
 &nbsp;
 
-Catwalk makes it easy to generate [beautiful preview images](https://user-images.githubusercontent.com/56817415/213472445-091e54fb-091f-4448-a631-fa6b2ba7d8a5.png) for your ports.
+Catwalk makes it easy to generate [beautiful preview images](https://raw.githubusercontent.com/catppuccin/vscode/main/assets/preview.webp) for your ports.
 
 > [!IMPORTANT]
 > This repository has been migrated from
