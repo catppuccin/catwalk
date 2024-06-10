@@ -56,8 +56,8 @@ jobs:
           cargo test --release --locked
 
           export BINARY_NAME="${EXECUTABLE}-$(rustc --version --verbose | grep host | cut -d ' ' -f 2)${EXE_SUFFIX}"
-          mv "target/release/${EXECUTABLE}${EXE_SUFFIX}" "./${BINARY_NAME}"
-          echo "binary=${BINARY_NAME}" >> $GITHUB_OUTPUT
+          mv "target/release/${EXECUTABLE}${EXE_SUFFIX}" "./target/${BINARY_NAME}"
+          echo "binary=target/${BINARY_NAME}" >> $GITHUB_OUTPUT
 
       - name: Publish to crates.io
         if: ${{ matrix.os == 'ubuntu-latest' }}
