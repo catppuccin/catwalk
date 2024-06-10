@@ -69,9 +69,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release upload "${{ needs.release-please.outputs.tag_name }}" ${{ steps.build.outputs.binary }}
-
-      - name: Upload to artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{steps.build.outputs.binary}}
-          path: ${{steps.build.outputs.binary}}
