@@ -31,6 +31,7 @@ You can install Catwalk using one of the methods below:
 | Source                                | `cargo install --git https://github.com/catppuccin/catwalk catppuccin-catwalk`                                                |
 | Homebrew                              | `brew install catppuccin/tap/catwalk`                                                                                         |
 | Nix                                   | `nix profile install github:catppuccin/catwalk` <br/> `nix run github:catppuccin/catwalk -- [OPTIONS] <images>` |
+| Gentoo                                | `sudo eselect repository add 151 && sudo emerge --sync guru && sudo emerge --ask catppuccin-neovim`                            |
 | Binaries<br/>(Windows, MacOS & Linux) | Available from the [latest GitHub release](https://github.com/catppuccin/catwalk/releases).                         |
 
 ## Usage
