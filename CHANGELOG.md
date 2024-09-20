@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.3](https://github.com/catppuccin/catwalk/compare/v1.3.2...v1.3.3) (2024-09-20)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate clap to v4.5.7 ([#16](https://github.com/catppuccin/catwalk/issues/16)) ([b1dede2](https://github.com/catppuccin/catwalk/commit/b1dede25722da515fd1498c6bfb5c83d7ec0f9c5))
+* **deps:** update rust crate clap to v4.5.8 ([#20](https://github.com/catppuccin/catwalk/issues/20)) ([390e7ff](https://github.com/catppuccin/catwalk/commit/390e7ff9120fda48991e4d8ee8bfe7b63a921654))
+* **deps:** update rust crate clap to v4.5.9 ([#22](https://github.com/catppuccin/catwalk/issues/22)) ([27a9d10](https://github.com/catppuccin/catwalk/commit/27a9d10b602a7090c71969ec8de81797077f1dc7))
+* **deps:** update rust crate clap_complete to v4.5.29 ([#27](https://github.com/catppuccin/catwalk/issues/27)) ([c88c171](https://github.com/catppuccin/catwalk/commit/c88c171490a1ba7f5ee85d28ba48efb659187ec2))
+* **deps:** update rust crate clap_complete to v4.5.6 ([#18](https://github.com/catppuccin/catwalk/issues/18)) ([cc93c62](https://github.com/catppuccin/catwalk/commit/cc93c629078fa477f9d6275aeecbe606edc52fa5))
+* **deps:** update rust crate clap_complete to v4.5.7 ([#21](https://github.com/catppuccin/catwalk/issues/21)) ([c1c9720](https://github.com/catppuccin/catwalk/commit/c1c972058d4dbb2ab738d26c68d6757f5b9658c7))
+* **deps:** update rust crate clap_complete to v4.5.8 ([#23](https://github.com/catppuccin/catwalk/issues/23)) ([1ed700e](https://github.com/catppuccin/catwalk/commit/1ed700e5c4565ab6f242ad310f8bafb891b96e02))
+* **deps:** update rust crate thiserror to v1.0.62 ([#24](https://github.com/catppuccin/catwalk/issues/24)) ([e3f9c7a](https://github.com/catppuccin/catwalk/commit/e3f9c7a05524bb2efab80ffe26f9301172ae75d3))
+* **deps:** update rust crate thiserror to v1.0.63 ([#25](https://github.com/catppuccin/catwalk/issues/25)) ([8a212da](https://github.com/catppuccin/catwalk/commit/8a212da54dac7c7035130f97827d6e39eaa3f2cf))
+
 ## [1.3.2](https://github.com/catppuccin/catwalk/compare/v1.3.1...v1.3.2) (2024-06-10)
 
 

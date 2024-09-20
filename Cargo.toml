@@ -4,7 +4,7 @@ description = "🚶 Soothing pastel previews for the high-spirited!"
 authors = ["Catppuccin Org <releases@catppuccin.com>"]
 repository = "https://github.com/catppuccin/catwalk"
 license = "MIT"
-version = "1.3.2"
+version = "1.3.3"
 edition = "2021"
 
 [profile.release]
