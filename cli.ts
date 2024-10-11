@@ -10,7 +10,7 @@ import {
   MagickColor,
   MagickFormat,
   MagickImage,
-} from "https://deno.land/x/imagemagick_deno@0.0.26/mod.ts";
+} from "https://deno.land/x/imagemagick_deno@0.0.31/mod.ts";
 
 const { args, options } = await new Command()
   .name("catwalk")
