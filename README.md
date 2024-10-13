@@ -25,13 +25,13 @@ Catwalk makes it easy to generate [beautiful preview images](https://raw.githubu
 
 You can install Catwalk using one of the methods below:
 
-| Installation Method                   | Instructions                                                                                                                  |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| crates.io                             | `cargo install catppuccin-catwalk`                                                                                            |
-| Source                                | `cargo install --git https://github.com/catppuccin/catwalk catppuccin-catwalk`                                                |
-| Homebrew                              | `brew install catppuccin/tap/catwalk`                                                                                         |
+| Installation Method                   | Instructions                                                                                                    |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| crates.io                             | `cargo install catppuccin-catwalk`                                                                              |
+| Source                                | `cargo install --git https://github.com/catppuccin/catwalk catppuccin-catwalk`                                  |
+| Homebrew                              | `brew install catppuccin/tap/catwalk`                                                                           |
 | Nix                                   | `nix profile install github:catppuccin/catwalk` <br/> `nix run github:catppuccin/catwalk -- [OPTIONS] <images>` |
-| Binaries<br/>(Windows, MacOS & Linux) | Available from the [latest GitHub release](https://github.com/catppuccin/catwalk/releases).                         |
+| Binaries<br/>(Windows, MacOS & Linux) | Available from the [latest GitHub release](https://github.com/catppuccin/catwalk/releases).                     |
 
 ## Usage
 
@@ -53,7 +53,7 @@ Arguments:
 
 Options:
   -o, --output <OUTPUT>        Path to output file [default: ./preview.webp]
-  -l, --layout <LAYOUT>        Layout to use [default: composite] [possible values: composite, stacked, grid, row]
+  -l, --layout <LAYOUT>        Layout to use [default: composite] [possible values: composite, stacked, grid, row, column]
   -r, --radius <RADIUS>        Radius of rounded corners (percentage)
   -g, --gap <GAP>              Size of gaps between pictures for the `grid` layout
   -C, --directory <DIRECTORY>  Change to <DIRECTORY> before processing files [default: .]
@@ -65,11 +65,11 @@ Options:
 ### Examples
 
 ```console
-$ catwalk latte.webp frappe.webp macchiato.webp mocha.webp --output catwalk.webp
+catwalk latte.webp frappe.webp macchiato.webp mocha.webp --output catwalk.webp
 ```
 
 ```console
-$ catwalk latte.png frappe.png macchiato.png mocha.png --directory ./assets/
+catwalk latte.png frappe.png macchiato.png mocha.png --directory ./assets/
 ```
 
 &nbsp;

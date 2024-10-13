@@ -23,11 +23,13 @@ pub enum Layout {
     Stacked,
     Grid,
     Row,
+    Column,
 }
 
 enum GridLayouts {
     Grid,
     Row,
+    Column,
 }
 
 #[derive(thiserror::Error, Debug)]
@@ -229,14 +231,10 @@ impl Magic {
     fn gen_grid(&self, layout: &GridLayouts) -> Image<Rgba> {
         // Round images
         let gap = self.gap;
-        let rounded: Vec<Image<Rgba>> = self
-            .images
-            .iter()
-            .map(|x| self.rounding_mask.mask(x))
-            .collect();
+        let rounded = self.images.iter().map(|x| self.rounding_mask.mask(x));
 
-        // Create final
-        let mut result = match layout {
+        // Create a blank image canvas to place each image into.
+        let mut canvas = match layout {
             GridLayouts::Grid => Image::new(
                 (self.width * 2) + (gap * 3),
                 (self.height * 2) + (gap * 3),
@@ -247,25 +245,34 @@ impl Magic {
                 self.height + (gap * 2),
                 Rgba::transparent(),
             ),
+            GridLayouts::Column => Image::new(
+                (self.width) + gap,
+                (self.height * 4) + (gap * 5),
+                Rgba::transparent(),
+            ),
         }
         .with_overlay_mode(OverlayMode::Merge);
-        // calculate the top left coordinates for each image, and paste
-        rounded.iter().enumerate().for_each(|(i, img)| {
+
+        // calculate the top left coordinates for each image, and copy
+        // their image data into the canvas.
+        rounded.enumerate().for_each(|(i, img)| {
             let x = match layout {
                 GridLayouts::Row => i % 4,
                 GridLayouts::Grid => i % 2,
+                GridLayouts::Column => 0,
             };
             let y = match layout {
                 GridLayouts::Row => 0,
                 GridLayouts::Grid => i / 2,
+                GridLayouts::Column => i % 4,
             };
-            result.paste(
+            canvas.paste(
                 gap + (self.width + gap) * x as u32,
                 gap + (self.height + gap) * y as u32,
-                img,
+                &img,
             );
         });
-        result
+        canvas
     }
     /// Generates a mask for the given image.
     fn gen_mask(w: f32, index: usize, aa_level: u32, inverse_slope: f32) -> TrapMask {
@@ -288,6 +295,7 @@ impl Magic {
             Layout::Stacked => self.gen_stacked(),
             Layout::Grid => self.gen_grid(&GridLayouts::Grid),
             Layout::Row => self.gen_grid(&GridLayouts::Row),
+            Layout::Column => self.gen_grid(&GridLayouts::Column),
         }
     }
 
