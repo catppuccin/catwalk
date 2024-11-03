@@ -1,4 +1,3 @@
-#![deny(clippy::perf, clippy::nursery, clippy::pedantic)]
 mod cli;
 
 use catppuccin_catwalk::Catwalk;

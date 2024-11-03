@@ -1,5 +1,5 @@
 // all of the stuff is named ...Mask here
-#![allow(clippy::module_name_repetitions)]
+#![allow(clippy::module_name_repetitions, clippy::cast_precision_loss)]
 
 use ril::prelude::*;
 
@@ -98,5 +98,21 @@ impl TrapMask {
                 })
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_dis() {
+        let point_1 = (1u32, 2u32);
+        let point_2 = (4u32, 2u32);
+        assert_eq!(RoundMask::get_dis(point_1, point_2), 9);
+
+        let point_1 = (1u32, 1u32);
+        let point_2 = (1u32, 1u32);
+        assert_eq!(RoundMask::get_dis(point_1, point_2), 0);
     }
 }

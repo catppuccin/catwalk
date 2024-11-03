@@ -1,8 +1,7 @@
-#![deny(clippy::perf, clippy::nursery, clippy::pedantic)]
-// ignore u32 -> f32 & vice versa for now
+// ignore u32 -> f32 & vice versa
 #![allow(
-    clippy::cast_possible_truncation,
     clippy::cast_precision_loss,
+    clippy::cast_possible_truncation,
     clippy::cast_sign_loss
 )]
 
@@ -99,7 +98,6 @@ impl Catwalk {
     }
 
     #[must_use]
-    #[allow(clippy::missing_const_for_fn)]
     pub fn aa_level(mut self, aa_level: Option<u32>) -> Self {
         let Some(aa_level) = aa_level else {
             return self;
@@ -108,7 +106,6 @@ impl Catwalk {
         self
     }
 
-    #[allow(clippy::missing_const_for_fn)]
     #[must_use]
     pub fn gap(mut self, gap: Option<u32>) -> Self {
         let Some(gap) = gap else {
@@ -128,7 +125,6 @@ impl Catwalk {
     /// Sets the radius of the rounding mask.
     /// # Errors
     /// Returns an error if the height or width are not set (automatically inferred from the `new` method arguments)
-    #[allow(clippy::use_self)]
     pub fn radius(mut self, radius: Option<u32>) -> Result<Catwalk, CatwalkError> {
         let radius = radius.unwrap_or(self.radius);
 
@@ -199,6 +195,7 @@ impl Magic {
             .rev()
             .map(|(i, x)| Self::gen_mask(w, i, 2, inverse_slope).mask(x))
             .collect();
+
         let mut result = Image::new(self.width, self.height, Rgba::default())
             .with_overlay_mode(OverlayMode::Merge);
         for mask in masked.iter().as_ref() {
@@ -267,6 +264,7 @@ impl Magic {
         });
         result
     }
+
     /// Generates a mask for the given image.
     fn gen_mask(w: f32, index: usize, aa_level: u32, inverse_slope: f32) -> TrapMask {
         if index == 3 {

@@ -1,5 +1,4 @@
 // needed for WASM
-#![allow(clippy::use_self, clippy::missing_const_for_fn)]
 
 use crate::{Catwalk, CatwalkError, Magic};
 use ril::{Image, Rgba};

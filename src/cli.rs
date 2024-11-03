@@ -1,4 +1,3 @@
-#![deny(clippy::perf, clippy::nursery, clippy::pedantic)]
 use catppuccin_catwalk::Layout;
 use clap::{Command, Parser, Subcommand, ValueEnum};
 use clap_complete::{generate, Generator, Shell};
