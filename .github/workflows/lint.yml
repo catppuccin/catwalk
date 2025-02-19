@@ -13,13 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+          targets: wasm32-unknown-unknown
 
       - name: clippy
         run: |
-          nix develop --command cargo clippy
-          nix develop --command cargo clippy --target wasm32-unknown-unknown --lib
-          nix develop --command cargo clippy --target wasm32-unknown-unknown --lib --all-features
+          cargo clippy
+          cargo clippy --target wasm32-unknown-unknown --lib
+          cargo clippy --target wasm32-unknown-unknown --lib --all-features
 
       - name: rustfmt check
         run: |
