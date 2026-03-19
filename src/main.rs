@@ -7,26 +7,23 @@ use cli::{get_cli_arguments, print_completions, Cli, Commands, Extension};
 use color_eyre::{eyre::eyre, Result};
 use ril::prelude::*;
 use std::io::Cursor;
+use std::path::PathBuf;
 
-macro_rules! open_image {
-    ($path:expr, $args:expr) => {{
-        let mut rel_path = $args.directory.clone().unwrap_or_default();
-        let path = $path.unwrap_or_default();
-        rel_path.push(path.clone());
-        // set the `--ext` file extension unless the filenames are explicitly given
-        if path == std::path::PathBuf::default() {
-            match $args.extension {
-                Extension::Webp => {
-                    rel_path.set_extension("webp");
-                }
-                Extension::Png => {
-                    rel_path.set_extension("png");
-                }
+fn open_image(path: Option<PathBuf>, args: &Cli) -> Result<Image<Rgba>> {
+    let mut rel_path = args.directory.clone().unwrap_or_default();
+    let path = path.unwrap_or_default();
+    rel_path.push(path.clone());
+    if path == PathBuf::default() {
+        match args.extension {
+            Extension::Webp => {
+                rel_path.set_extension("webp");
+            }
+            Extension::Png => {
+                rel_path.set_extension("png");
             }
         }
-        Image::<Rgba>::open(&rel_path)
-            .map_or(Err(eyre!("Failed to open `{}`", &rel_path.display())), Ok)?
-    }};
+    }
+    Image::<Rgba>::open(&rel_path).map_or(Err(eyre!("Failed to open `{}`", rel_path.display())), Ok)
 }
 
 fn main() -> Result<()> {
@@ -52,10 +49,10 @@ fn main() -> Result<()> {
     }
 
     let catwalk = Catwalk::new([
-        open_image!(args.latte, args),
-        open_image!(args.frappe, args),
-        open_image!(args.macchiato, args),
-        open_image!(args.mocha, args),
+        open_image(args.latte.clone(), &args)?,
+        open_image(args.frappe.clone(), &args)?,
+        open_image(args.macchiato.clone(), &args)?,
+        open_image(args.mocha.clone(), &args)?,
     ])?
     .gap(args.gap)
     .layout(Some(args.layout))
