@@ -35,12 +35,7 @@ impl RoundMask {
             if ((x <= r) || (x >= corners[2].0)) && ((y <= r) || (y >= corners[2].1)) {
                 // y is in corner squares
                 let distances = corners.iter().map(|c| Self::get_dis((x, y), c.to_owned()));
-                if distances
-                    .clone()
-                    .map(|c| c <= r.pow(2))
-                    .collect::<Vec<bool>>()
-                    == vec![false, false, false, false]
-                {
+                if distances.clone().all(|c| c > r.pow(2)) {
                     // y is not in mask
                     let diffs: Vec<u32> = distances.map(|dis| dis - r.pow(2)).collect();
                     for diff in diffs {
