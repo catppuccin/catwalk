@@ -88,7 +88,7 @@ impl Catwalk {
             .any(|x| x.height() != height || x.width() != width)
         {
             return Err(CatwalkError::SameSize);
-        };
+        }
 
         Ok(Self {
             images: Some(images),
